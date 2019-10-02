@@ -1,10 +1,27 @@
 local Map = require 'core/map'
 
 function love.load()
+  map = Map:new(12, 12)
   x = 400
   y = 300
   playerImg = love.graphics.newImage('assets-1/player/base/octopode_1.png')
-
+  floor = love.graphics.newImage('assets-1/dark_floor.png')
+flour = {
+          {floor, floor, floor, floor, floor, floor, floor, floor, floor, floor, floor, floor},
+          {floor, floor, floor, floor, floor, floor, floor, floor, floor, floor, floor, floor},
+          {floor, floor, floor, floor, floor, floor, floor, floor, floor, floor, floor, floor},
+          {floor, floor, floor, floor, floor, floor, floor, floor, floor, floor, floor, floor},
+          {floor, floor, floor, floor, floor, floor, floor, floor, floor, floor, floor, floor},
+          {floor, floor, floor, floor, floor, floor, floor, floor, floor, floor, floor, floor},
+          {floor, floor, floor, floor, floor, floor, floor, floor, floor, floor, floor, floor},
+          {floor, floor, floor, floor, floor, floor, floor, floor, floor, floor, floor, floor},
+          {floor, floor, floor, floor, floor, floor, floor, floor, floor, floor, floor, floor},
+          {floor, floor, floor, floor, floor, floor, floor, floor, floor, floor, floor, floor},
+          {floor, floor, floor, floor, floor, floor, floor, floor, floor, floor, floor, floor},
+          {floor, floor, floor, floor, floor, floor, floor, floor, floor, floor, floor, floor}
+        }
+map = Map:new(flour)
+end
 function love.update(dt)
  if love.keyboard.isDown('w')then
     y = y - 1
@@ -25,8 +42,6 @@ function love.update(dt)
 end
 
 function love.draw()
-  love.graphics.print('Hello, world!', 0, 0)
   map:draw()
   love.graphics.draw(playerImg, x, y)
 end
-
