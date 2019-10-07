@@ -1,5 +1,4 @@
-local Map = require 'core/map'
-
+love.graphics.setDefaultFilter('nearest', 'nearest')
 function love.load()
   map = Map:new(12, 12)
   x = 400
@@ -38,7 +37,9 @@ function love.update(dt)
 end
 
 function love.update(dt)
-  -- Nothing to update yet
+  if love.keyboard.isDown('right') then
+    x = x + 1
+  end
 end
 
 function love.draw()
