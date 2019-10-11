@@ -56,6 +56,9 @@ function love.update(dt)
   end
 end
 
+
+
+
 function love.update(dt)
   if love.keyboard.isDown('up')then
     y = y - 1
@@ -71,6 +74,10 @@ function love.update(dt)
   end
   cam:setPosition(320, 768)
 end
+
+
+
+
 
 function love.draw()
   map:draw() 
