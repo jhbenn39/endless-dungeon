@@ -13,7 +13,7 @@ function love.load()
   mv = love.graphics.newImage('mdbyme/mid_void.png')
   dv = love.graphics.newImage('mdbyme/dark_floor.png')
 floor = {
-          {wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, mv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv},
+         <top left> {wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, mv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv},<bottomright>
           {wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, mv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv},
           {wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, mv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv},
           {wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, mv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv},
@@ -54,6 +54,7 @@ function love.update(dt)
   if love.keyboard.isDown('d')then
     x = x + 1
   end
+  cam:setPosition(x, y)
 end
 
 
@@ -72,7 +73,7 @@ function love.update(dt)
   if love.keyboard.isDown('right')then
     x = x + 1
   end
-  cam:setPosition(320, 768)
+  cam:setPosition(x, y)
 end
 
 
@@ -80,8 +81,10 @@ end
 
 
 function love.draw()
-  map:draw() 
+   
   cam:draw(function(l, t, w, h)
+    map:draw()
   love.graphics.draw(playerImg, x, y)
   end)
+  
 end
