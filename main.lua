@@ -1,6 +1,7 @@
 love.graphics.setDefaultFilter('nearest', 'nearest')
 local Map = require 'core/map'
 local gamera = require 'core/gamera'
+local Util = require 'core/util'
 
 function love.load()
   map = Map:new(0, 0)
@@ -12,66 +13,116 @@ function love.load()
   bed = love.graphics.newImage('mdbyme/bed.png')
   mv = love.graphics.newImage('mdbyme/mid_void.png')
   dv = love.graphics.newImage('mdbyme/dark_floor.png')
-floor = {
-         <top left> {wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, mv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv},<bottomright>
-          {wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, mv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv},
-          {wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, mv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv},
-          {wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, mv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv},
-          {wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, mv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv},
-          {wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, mv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv},
-          {wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, mv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv},
-          {wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, mv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv},
-          {wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, mv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv},
-          {wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, mv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv},
-          {wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, mv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv},
-          {wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, mv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv},
-          {wv, wv, wv, bed, wv, wv, wv, wv, wv, wv, wv, wv, mv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv},
-          {wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, mv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv},
-          {wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, mv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv},
-          {wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, mv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv},
-          {wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, mv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv},
-          {wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, mv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv},
-          {wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, mv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv},
-          {wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, mv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv},
-          {wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, mv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv},
-          {wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, mv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv},
-          {wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, mv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv},
-          {wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, mv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv},
-          {wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, mv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv},
-        }
-map = Map:new(floor)
-end
-function love.update(dt)
- if love.keyboard.isDown('w')then
-    y = y - 1
-  end
-  if love.keyboard.isDown('a')then
-    x = x - 1
-  end
-  if love.keyboard.isDown('s')then
-    y = y + 1
-  end
-  if love.keyboard.isDown('d')then
-    x = x + 1
-  end
-  cam:setPosition(x, y)
-end
+  
 
+floor = {
+          {wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv},
+          {wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv},
+          {wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv},
+          {wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv},
+          {wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv},
+          {wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv},
+          {wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv},
+          {wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv},
+          {wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv},
+          {wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv},
+          {wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv},
+          {wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv},
+          {mv, mv, mv, mv, mv, mv, mv, mv, mv, mv, mv, mv, mv, mv, mv, mv, mv, mv, mv, mv, mv, mv, mv, mv},
+          {dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv},
+          {dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv},
+          {dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv},
+          {dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv},
+          {dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv},
+          {dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv},
+          {dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv},
+          {dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv},
+          {dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv},
+          {dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv},
+          {dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv},
+          {dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv}
+        }
+
+
+clw = love.graphics.newImage('mdbyme/white_voidcl.png')
+clm = love.graphics.newImage('mdbyme/mid_voidcl.png')
+cld = love.graphics.newImage('mdbyme/dark_voidcl.png')
+
+collision = {
+  {clw, clw, clw, clw, clw, clw, clw, clw, clw, clw, clw, clw, clw, clw, clw, clw, clw, clw, clw, clw, clw, clw, clw, clw},
+  {clw, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, clw},
+  {clw, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, clw},
+  {clw, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, clw},
+  {clw, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, clw},
+  {clw, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, clw},
+  {clw, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, clw},
+  {clw, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, clw},
+  {clw, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, clw},
+  {clw, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, clw},
+  {clw, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, clw},
+  {clw, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, clw},
+  {clw, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, clw},
+  {clw, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, clw},
+  {clm, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, clm},
+  {cld, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, cld},
+  {cld, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, cld},
+  {cld, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, cld},
+  {cld, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, cld},
+  {cld, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, cld},
+  {cld, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, cld},
+  {cld, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, cld},
+  {cld, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, cld},
+  {cld, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, cld},
+  {cld, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, cld},
+  {cld, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, cld},
+  {cld, cld, cld, cld, cld, cld, cld, cld, cld, cld, cld, cld, cld, cld, cld, cld, cld, cld, cld, cld, cld, cld, cld, cld},
+}
+collision = Map:new(collision)
+floor = Map:new(floor)
+end
 
 
 
 function love.update(dt)
   if love.keyboard.isDown('up')then
-    y = y - 1
+    if collision:cc(x, y, 64, 64) == false then
+      y = y - 1
+    end
   end
   if love.keyboard.isDown('left')then
-    x = x - 1
+    if collision:cc(x, y, 64, 64) == false then
+      x = x - 1
+    end
   end
   if love.keyboard.isDown('down')then
-    y = y + 1
+    if collision:cc(x, y, 64, 64) == false then
+      y = y + 1
+    end
   end
   if love.keyboard.isDown('right')then
-    x = x + 1
+    if collision:cc(x, y, 64, 64) == false then
+      x = x + 1
+    end
+  end
+  if love.keyboard.isDown('w')then
+    if collision:cc(x, y, 64, 64) == false then
+      y = y - 1
+    end
+  end
+  if love.keyboard.isDown('a')then
+    if collision:cc(x, y, 64, 64) == false then
+      x = x - 1
+    end
+  end
+  if love.keyboard.isDown('s')then
+    if collision:cc(x, y, 64, 64) == false then
+      y = y + 1
+    end
+  end
+  if love.keyboard.isDown('d')then
+    if collision:cc(x, y, 64, 64) == false then
+      x = x + 1
+    end
   end
   cam:setPosition(x, y)
 end
@@ -81,9 +132,9 @@ end
 
 
 function love.draw()
-   
   cam:draw(function(l, t, w, h)
-    map:draw()
+  floor:draw()
+  collision:draw()
   love.graphics.draw(playerImg, x, y)
   end)
   
