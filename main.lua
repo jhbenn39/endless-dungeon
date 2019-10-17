@@ -54,9 +54,7 @@ collision = {
   {clw, 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', clw},
   {clw, 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', clw},
   {clw, 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', clw},
-  {clw, 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', clw},
-  {clw, 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', clw},
-  {clw, 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', clw},
+  {clw, 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', bed, 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', clw},
   {clw, 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', clw},
   {clw, 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', clw},
   {clw, 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', clw},
@@ -75,53 +73,54 @@ collision = {
   {cld, 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', cld},
   {cld, 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', cld},
   {cld, 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', cld},
+  {cld, 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', cld},
   {cld, cld, cld, cld, cld, cld, cld, cld, cld, cld, cld, cld, cld, cld, cld, cld, cld, cld, cld, cld, cld, cld, cld, cld},
 }
-collision = Map:new(collision)
 floor = Map:new(floor)
+collision = Map:new(collision)
 end
 
 
 
 function love.update(dt)
   if love.keyboard.isDown('up')then
-    if collision:cc(x, y, 64, 64) == false then
-      y = y - 1
+    if collision:cc(x, y - 4, 64, 64) == false then
+      y = y - 4
     end
   end
   if love.keyboard.isDown('left')then
-    if collision:cc(x, y, 64, 64) == false then
-      x = x - 1
+    if collision:cc(x - 4, y, 64, 64) == false then
+      x = x - 4
     end
   end
   if love.keyboard.isDown('down')then
-    if collision:cc(x, y, 64, 64) == false then
-      y = y + 1
+    if collision:cc(x, y + 4, 64, 64) == false then
+      y = y + 4
     end
   end
   if love.keyboard.isDown('right')then
-    if collision:cc(x, y, 64, 64) == false then
-      x = x + 1
+    if collision:cc(x + 4, y, 64, 64) == false then
+      x = x + 4
     end
   end
   if love.keyboard.isDown('w')then
-    if collision:cc(x, y, 64, 64) == false then
-      y = y - 1
+    if collision:cc(x, y - 4, 64, 64) == false then
+      y = y - 4
     end
   end
   if love.keyboard.isDown('a')then
-    if collision:cc(x, y, 64, 64) == false then
-      x = x - 1
+    if collision:cc(x - 4, y, 64, 64) == false then
+      x = x - 4
     end
   end
   if love.keyboard.isDown('s')then
-    if collision:cc(x, y, 64, 64) == false then
-      y = y + 1
+    if collision:cc(x, y + 4, 64, 64) == false then
+      y = y + 4
     end
   end
   if love.keyboard.isDown('d')then
-    if collision:cc(x, y, 64, 64) == false then
-      x = x + 1
+    if collision:cc(x + 4, y, 64, 64) == false then
+      x = x + 4
     end
   end
   cam:setPosition(x, y)
