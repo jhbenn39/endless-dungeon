@@ -87,6 +87,7 @@ function love.update(dt)
     if collision:cc(x, y - 4, 64, 64) == false then
       y = y - 4
     end
+    for 
   end
   if love.keyboard.isDown('left')then
     if collision:cc(x - 4, y, 64, 64) == false then
