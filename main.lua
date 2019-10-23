@@ -2,13 +2,16 @@ love.graphics.setDefaultFilter('nearest', 'nearest')
 local Map = require 'core/map'
 local gamera = require 'core/gamera'
 local Util = require 'core/util'
+local anim8 = require 'core/anim8'
 
 function love.load()
   map = Map:new(0, 0)
   cam = gamera.new(0, 0, 1600, 1536)
   x = 320
   y = 768
-  playerImg = love.graphics.newImage('mdbyme/player.png')
+  spritesheet = love.graphics.newImage('mdbyme/spritesheet.png')
+  grid = anim8.newGrid(18, 34, spritesheet:getWidth(), spritesheet:getHeight())
+  walk = anim8.newAnimation(grid('1-6', 2), 0.2)
   wv = love.graphics.newImage('mdbyme/white_void.png')
   bed = love.graphics.newImage('mdbyme/bed.png')
   mv = love.graphics.newImage('mdbyme/mid_void.png')
@@ -87,7 +90,7 @@ function love.update(dt)
     if collision:cc(x, y - 4, 64, 64) == false then
       y = y - 4
     end
-    for 
+
   end
   if love.keyboard.isDown('left')then
     if collision:cc(x - 4, y, 64, 64) == false then
@@ -124,6 +127,7 @@ function love.update(dt)
       x = x + 4
     end
   end
+  walk:update(dt)
   cam:setPosition(x, y)
 end
 
@@ -135,7 +139,7 @@ function love.draw()
   cam:draw(function(l, t, w, h)
   floor:draw()
   collision:draw()
-  love.graphics.draw(playerImg, x, y)
+  walk:draw(spritesheet, 56, 137)
   end)
   
 end
