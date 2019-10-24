@@ -11,7 +11,10 @@ function love.load()
   y = 768
   spritesheet = love.graphics.newImage('mdbyme/spritesheet.png')
   grid = anim8.newGrid(18, 34, spritesheet:getWidth(), spritesheet:getHeight())
-  walk = anim8.newAnimation(grid('1-6', 2), 0.2)
+  walk1 = anim8.newAnimation(grid('1-3', 1), 0.2)
+  walk2 = anim8.newAnimation(grid('1-3', 2), 0.2)
+  walk3 = anim8.newAnimation(grid('1-3', 3), 0.2)
+  walk4 = anim8.newAnimation(grid('1-3', 4), 0.2)
   wv = love.graphics.newImage('mdbyme/white_void.png')
   bed = love.graphics.newImage('mdbyme/bed.png')
   mv = love.graphics.newImage('mdbyme/mid_void.png')
@@ -86,48 +89,31 @@ end
 
 
 function love.update(dt)
-  if love.keyboard.isDown('up')then
+  if love.keyboard.isDown('up') or love.keyboard.isDown('w') then
     if collision:cc(x, y - 4, 64, 64) == false then
       y = y - 4
+      walk2:update(dt)
     end
 
   end
-  if love.keyboard.isDown('left')then
+  if love.keyboard.isDown('left') or love.keyboard.isDown('a') then
     if collision:cc(x - 4, y, 64, 64) == false then
       x = x - 4
+      walk4:update(dt)
     end
   end
-  if love.keyboard.isDown('down')then
+  if love.keyboard.isDown('down') or love.keyboard.isDown('s') then
     if collision:cc(x, y + 4, 64, 64) == false then
       y = y + 4
+      walk1:update(dt)
     end
   end
-  if love.keyboard.isDown('right')then
+  if love.keyboard.isDown('right') or love.keyboard.isDown('d') then
     if collision:cc(x + 4, y, 64, 64) == false then
       x = x + 4
+      walk3:update(dt)
     end
   end
-  if love.keyboard.isDown('w')then
-    if collision:cc(x, y - 4, 64, 64) == false then
-      y = y - 4
-    end
-  end
-  if love.keyboard.isDown('a')then
-    if collision:cc(x - 4, y, 64, 64) == false then
-      x = x - 4
-    end
-  end
-  if love.keyboard.isDown('s')then
-    if collision:cc(x, y + 4, 64, 64) == false then
-      y = y + 4
-    end
-  end
-  if love.keyboard.isDown('d')then
-    if collision:cc(x + 4, y, 64, 64) == false then
-      x = x + 4
-    end
-  end
-  walk:update(dt)
   cam:setPosition(x, y)
 end
 
@@ -139,7 +125,18 @@ function love.draw()
   cam:draw(function(l, t, w, h)
   floor:draw()
   collision:draw()
-  walk:draw(spritesheet, 56, 137)
+  if love.keyboard.isDown('up') or love.keyboard.isDown('w') then
+    walk2:draw(spritesheet, x, y)
+  end
+  if love.keyboard.isDown('left') or love.keyboard.isDown('a') then
+    walk4:draw(spritesheet, x, y)
+  end
+  if love.keyboard.isDown('down') or love.keyboard.isDown('s') then
+    walk1:draw(spritesheet, x, y)
+  end
+  if love.keyboard.isDown('right') or love.keyboard.isDown('d') then
+    walk3:draw(spritesheet, x, y)
+  end
   end)
   
 end
