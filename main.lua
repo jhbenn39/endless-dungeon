@@ -15,6 +15,10 @@ function love.load()
   walk2 = anim8.newAnimation(grid('1-3', 2), 0.2)
   walk3 = anim8.newAnimation(grid('1-3', 3), 0.2)
   walk4 = anim8.newAnimation(grid('1-3', 4), 0.2)
+  idle1 = anim8.newAnimation(grid('1-1', 2), 0.2)
+  idle2 = anim8.newAnimation(grid('1-1', 4), 0.2)
+  idle3 = anim8.newAnimation(grid('1-1', 1), 0.2)
+  idle4 = anim8.newAnimation(grid('1-1', 3), 0.2)
   wv = love.graphics.newImage('mdbyme/white_void.png')
   bed = love.graphics.newImage('mdbyme/bed.png')
   mv = love.graphics.newImage('mdbyme/mid_void.png')
@@ -100,7 +104,7 @@ function love.update(dt)
     if collision:cc(x - 4, y, 64, 64) == false then
       x = x - 4
       walk4:update(dt)
-    end
+    end 
   end
   if love.keyboard.isDown('down') or love.keyboard.isDown('s') then
     if collision:cc(x, y + 4, 64, 64) == false then
@@ -128,14 +132,26 @@ function love.draw()
   if love.keyboard.isDown('up') or love.keyboard.isDown('w') then
     walk2:draw(spritesheet, x, y)
   end
+  if love.keyreleased('up') or love.keyreleased('w') then
+    idle1:draw(spritesheet, x, y)
+  end
   if love.keyboard.isDown('left') or love.keyboard.isDown('a') then
     walk4:draw(spritesheet, x, y)
+  end
+  if love.keyreleased('left') or love.keyreleased('a') then
+    idle2:draw(spritesheet, x, y)
   end
   if love.keyboard.isDown('down') or love.keyboard.isDown('s') then
     walk1:draw(spritesheet, x, y)
   end
+  if love.keyreleased('down') or love.keyreleased('s') then
+    idle3:draw(spritesheet, x, y)
+  end
   if love.keyboard.isDown('right') or love.keyboard.isDown('d') then
     walk3:draw(spritesheet, x, y)
+  end
+  if love.keyreleased('right') or love.keyreleased('d') then
+    idle4:draw(spritesheet, x, y)
   end
   end)
   
