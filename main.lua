@@ -132,27 +132,33 @@ function love.draw()
   if love.keyboard.isDown('up') or love.keyboard.isDown('w') then
     walk2:draw(spritesheet, x, y)
   end
-  if love.keyreleased('up') or love.keyreleased('w') then
-    idle1:draw(spritesheet, x, y)
-  end
+  
   if love.keyboard.isDown('left') or love.keyboard.isDown('a') then
     walk4:draw(spritesheet, x, y)
   end
-  if love.keyreleased('left') or love.keyreleased('a') then
-    idle2:draw(spritesheet, x, y)
-  end
+  
   if love.keyboard.isDown('down') or love.keyboard.isDown('s') then
     walk1:draw(spritesheet, x, y)
   end
-  if love.keyreleased('down') or love.keyreleased('s') then
-    idle3:draw(spritesheet, x, y)
-  end
+ 
   if love.keyboard.isDown('right') or love.keyboard.isDown('d') then
     walk3:draw(spritesheet, x, y)
   end
-  if love.keyreleased('right') or love.keyreleased('d') then
-    idle4:draw(spritesheet, x, y)
-  end
+ 
   end)
-  
+  function love.keyreleased(key)
+    if key == "w" or "up" then
+      idle1:draw(spritesheet, x, y)
+    end
+    
+    if key == "a" or "left" then
+      idle2:draw(spritesheet, x, y)
+    end
+    if key == "s" or "down" then
+      idle3:draw(spritesheet, x, y)
+    end
+    if key == "d" or "right" then
+      idle4:draw(spritesheet, x, y)
+    end
+  end
 end
