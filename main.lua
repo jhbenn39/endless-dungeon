@@ -15,10 +15,7 @@ function love.load()
   walk2 = anim8.newAnimation(grid('1-3', 2), 0.2)
   walk3 = anim8.newAnimation(grid('1-3', 3), 0.2)
   walk4 = anim8.newAnimation(grid('1-3', 4), 0.2)
-  idle1 = anim8.newAnimation(grid('1-1', 2), 0.2)
-  idle2 = anim8.newAnimation(grid('1-1', 4), 0.2)
-  idle3 = anim8.newAnimation(grid('1-1', 1), 0.2)
-  idle4 = anim8.newAnimation(grid('1-1', 3), 0.2)
+  idle = love.graphics.newAnimation(grid('1', 1), 0.2)
   wv = love.graphics.newImage('mdbyme/white_void.png')
   bed = love.graphics.newImage('mdbyme/bed.png')
   mv = love.graphics.newImage('mdbyme/mid_void.png')
@@ -144,21 +141,6 @@ function love.draw()
   if love.keyboard.isDown('right') or love.keyboard.isDown('d') then
     walk3:draw(spritesheet, x, y)
   end
- 
+idle:draw(spritesheet, x, y)
   end)
-  function love.keyreleased(key)
-    if key == "w" or "up" then
-      idle1:draw(spritesheet, x, y)
-    end
-    
-    if key == "a" or "left" then
-      idle2:draw(spritesheet, x, y)
-    end
-    if key == "s" or "down" then
-      idle3:draw(spritesheet, x, y)
-    end
-    if key == "d" or "right" then
-      idle4:draw(spritesheet, x, y)
-    end
-  end
 end
