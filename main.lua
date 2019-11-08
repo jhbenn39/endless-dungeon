@@ -92,9 +92,6 @@ end
 
 
 function love.update(dt)
-  if collision:cc(x, y, 64, 64) == true && love.keyboard.isDown('space') then
-    love.graphics.print('Player: Who are you? Where am i? How did I get here?',  100, 100)
-  end
     if love.keyboard.isDown('up') or love.keyboard.isDown('w') then
     if collision:cc(x, y - 4, 64, 64) == false then
       y = y - 4
@@ -132,6 +129,9 @@ function love.draw()
   floor:draw()
   collision:draw()
   idle:draw(spritesheet, x, y)
+  if collision:cc(x, y, 64, 64) == true and love.keyboard.isDown('space') then
+    love.graphics.print('Player: Who are you? Where am i? How did I get here?',  100, 100)
+  end
   if love.keyboard.isDown('up') or love.keyboard.isDown('w') then
     walk2:draw(spritesheet, x, y)
   end
