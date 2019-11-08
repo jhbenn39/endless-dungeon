@@ -9,6 +9,10 @@ function love.load()
   cam = gamera.new(0, 0, 1600, 1536)
   x = 320
   y = 768
+  w = 18
+  h = 34
+  a = 320
+  a1 = 576
   spritesheet = love.graphics.newImage('mdbyme/spritesheet.png')
   grid = anim8.newGrid(18, 34, spritesheet:getWidth(), spritesheet:getHeight())
   walk1 = anim8.newAnimation(grid('1-3', 1), 0.2)
@@ -24,95 +28,95 @@ function love.load()
   fountain = love.graphics.newImage('mdbyme/fountain.png')
   goblet = love.graphics.newImage('mdbyme/goblet.png')
 
-floor = {
-          {wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv},
-          {wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv},
-          {wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv},
-          {wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv},
-          {wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv},
-          {wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv},
-          {wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv},
-          {wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv},
-          {wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv},
-          {wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv},
-          {wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv},
-          {wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv},
-          {mv, mv, mv, mv, mv, mv, mv, mv, mv, mv, mv, mv, mv, mv, mv, mv, mv, mv, mv, mv, mv, mv, mv, mv},
-          {dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv},
-          {dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv},
-          {dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv},
-          {dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv},
-          {dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv},
-          {dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv},
-          {dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv},
-          {dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv},
-          {dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv},
-          {dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv},
-          {dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv},
-          {dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv}
-        }
+  floor = {
+    {wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv},
+    {wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv},
+    {wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv},
+    {wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv},
+    {wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv},
+    {wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv},
+    {wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv},
+    {wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv},
+    {wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv},
+    {wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv},
+    {wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv},
+    {wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv, wv},
+    {mv, mv, mv, mv, mv, mv, mv, mv, mv, mv, mv, mv, mv, mv, mv, mv, mv, mv, mv, mv, mv, mv, mv, mv},
+    {dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv},
+    {dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv},
+    {dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv},
+    {dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv},
+    {dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv},
+    {dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv},
+    {dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv},
+    {dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv},
+    {dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv},
+    {dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv},
+    {dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv},
+    {dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv, dv}
+  }
 
 
-clw = love.graphics.newImage('mdbyme/white_voidcl.png')
-clm = love.graphics.newImage('mdbyme/mid_voidcl.png')
-cld = love.graphics.newImage('mdbyme/dark_voidcl.png')
+  clw = love.graphics.newImage('mdbyme/white_voidcl.png')
+  clm = love.graphics.newImage('mdbyme/mid_voidcl.png')
+  cld = love.graphics.newImage('mdbyme/dark_voidcl.png')
 
-collision = {
-  {clw, clw, clw, clw, clw, clw, clw, clw, clw, clw, clw, clw, clw, clw, clw, clw, clw, clw, clw, clw, clw, clw, clw, clw},
-  {clw, 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', clw},
-  {clw, 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', clw},
-  {clw, 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', fountain, 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', clw},
-  {clw, 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', clw},
-  {clw, 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', spirit, 'nil', 'nil', 'nil', bed, 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', clw},
-  {clw, 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', clw},
-  {clw, 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', clw},
-  {clw, 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', clw},
-  {clw, 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', clw},
-  {clw, 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', clw},
-  {clw, 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', clw},
-  {clm, 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', clm},
-  {cld, 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', cld},
-  {cld, 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', cld},
-  {cld, 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', cld},
-  {cld, 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', cld},
-  {cld, 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', cld},
-  {cld, 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', cld},
-  {cld, 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', cld},
-  {cld, 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', cld},
-  {cld, 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', cld},
-  {cld, 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', cld},
-  {cld, 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', goblet, 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', cld},
-  {cld, 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', cld},
-  {cld, cld, cld, cld, cld, cld, cld, cld, cld, cld, cld, cld, cld, cld, cld, cld, cld, cld, cld, cld, cld, cld, cld, cld},
-}
-floor = Map:new(floor)
-collision = Map:new(collision)
+  collision = {
+    {clw, clw, clw, clw, clw, clw, clw, clw, clw, clw, clw, clw, clw, clw, clw, clw, clw, clw, clw, clw, clw, clw, clw, clw},
+    {clw, 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', clw},
+    {clw, 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', clw},
+    {clw, 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', fountain, 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', clw},
+    {clw, 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', clw},
+    {clw, 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', spirit, 'nil', 'nil', 'nil', bed, 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', clw},
+    {clw, 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', clw},
+    {clw, 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', clw},
+    {clw, 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', clw},
+    {clw, 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', clw},
+    {clw, 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', clw},
+    {clw, 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', clw},
+    {clm, 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', clm},
+    {cld, 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', cld},
+    {cld, 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', cld},
+    {cld, 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', cld},
+    {cld, 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', cld},
+    {cld, 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', cld},
+    {cld, 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', cld},
+    {cld, 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', cld},
+    {cld, 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', cld},
+    {cld, 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', cld},
+    {cld, 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', cld},
+    {cld, 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', goblet, 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', cld},
+    {cld, 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', 'nil', cld},
+    {cld, cld, cld, cld, cld, cld, cld, cld, cld, cld, cld, cld, cld, cld, cld, cld, cld, cld, cld, cld, cld, cld, cld, cld},
+  }
+  floor = Map:new(floor)
+  collision = Map:new(collision)
 end
 
 
 
 function love.update(dt)
     if love.keyboard.isDown('up') or love.keyboard.isDown('w') then
-    if collision:cc(x, y - 4, 64, 64) == false then
+    if collision:cc(x, y - 4, w, h) == false then
       y = y - 4
       walk2:update(dt)
     end
 
   end
   if love.keyboard.isDown('left') or love.keyboard.isDown('a') then
-    if collision:cc(x - 4, y, 64, 64) == false then
+    if collision:cc(x - 4, y, w, h) == false then
       x = x - 4
       walk4:update(dt)
     end 
   end
   if love.keyboard.isDown('down') or love.keyboard.isDown('s') then
-    if collision:cc(x, y + 4, 64, 64) == false then
+    if collision:cc(x, y + 4, w, h) == false then
       y = y + 4
       walk1:update(dt)
     end
   end
   if love.keyboard.isDown('right') or love.keyboard.isDown('d') then
-    if collision:cc(x + 4, y, 64, 64) == false then
+    if collision:cc(x + 4, y, w, h) == false then
       x = x + 4
       walk3:update(dt)
     end
@@ -129,9 +133,11 @@ function love.draw()
   floor:draw()
   collision:draw()
   idle:draw(spritesheet, x, y)
-  if collision:cc(x, y, 64, 64) == true and love.keyboard.isDown('space') then
-    love.graphics.print('Player: Who are you? Where am i? How did I get here?',  100, 100)
-  end
+  if cc(x, y, 36, 68,  a, a1, 96, 96) then
+    love.graphics.setColor(0, 0, 0, 1)
+    love.graphics.print('Player: Who are you? Where am I? How did I get here?',  x + 20, y + 20)
+    love.graphics.setColor(1, 1, 1, 1)
+  end 
   if love.keyboard.isDown('up') or love.keyboard.isDown('w') then
     walk2:draw(spritesheet, x, y)
   end
